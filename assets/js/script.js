@@ -47,6 +47,7 @@ const QuizQuestionsArr = [
 //JS Variables
 var Score = 0;
 var currentQuestionIndex = 0;
+var timeLeft = 30;
 
 //HTML Elements
 var timerCurTime = document.querySelector("#current-time");
@@ -83,26 +84,45 @@ function updateQuestions() {
     currentQuestionIndex++;
 }
 
-var answerClicked = () => {
-    if(false){
+var answerClickedEvent = (event) => {
+    var element = event.target;
+    
+    console.log(element.dataset.num);
+    var isCorrect = QuizQuestionsArr[currentQuestionIndex].answerArr[element.dataset.num - 1].correct;
+    evaluateAnswer(isCorrect);
+}
+
+
+var evaluateAnswer = (isCorrect) => {
+    if(isCorrect){
         Score++;
+        console.log(Score);
     }
     updateQuestions();
 }
-answerButton1.addEventListener("click", answerClicked);
-answerButton2.addEventListener("click", answerClicked);
-answerButton3.addEventListener("click", answerClicked);
-answerButton4.addEventListener("click", answerClicked);
 
-container.addEventListener("click", function(event) {
+answerButton1.addEventListener("click", answerClickedEvent);
+answerButton2.addEventListener("click", answerClickedEvent);
+answerButton3.addEventListener("click", answerClickedEvent);
+answerButton4.addEventListener("click", answerClickedEvent);
 
-    var element = event.target;
-    
-    element.innerHTML = element.dataset.number;
-});
+function countdown() {
+    // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function() {
+      if (timeLeft < 0) {
+        clearInterval(timeInterval);
+        timerEl.textContent = null;
+        displayMessage();
+      } else {
+        timerCurTime.textContent = timeLeft;
+        timeLeft--;
+      }
+    }, 1000);
+  }
 
 function retrieveScores() { }
 function startQuiz() { }
 function endQuiz() { }
 
 updateQuestions();
+countdown();
