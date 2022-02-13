@@ -62,6 +62,24 @@ ul li {
     list-style: none;
 }
 
+#quiz-start{
+    padding: .7rem 1.2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: rgb(75, 32, 155);
+    border-radius: 12px;
+    max-width: 25%;
+    position:absolute;
+    margin-top: 2em;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+#quiz-start:hover {
+    opacity: .5;
+}
+
 .answer-choice-1, .answer-choice-2, .answer-choice-3, .answer-choice-4{
     padding: .7rem 1.2rem;
     font-size: 1rem;
